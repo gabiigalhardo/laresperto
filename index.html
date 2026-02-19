@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lar Esperto – Os melhores achados para sua casa</title>
+  <meta name="description" content="Dicas, reviews e os melhores produtos para casa, organização e dia a dia com os melhores preços do Mercado Livre.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #FAF7F2;
+      --card: #FFFFFF;
+      --text: #1C1A17;
+      --muted: #7A7167;
+      --accent: #C45E2E;
+      --accent2: #E8A87C;
+      --border: #E5DFD5;
+      --tag-bg: #F2EDE6;
+      --green: #4A7C59;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--text);
+      color: var(--bg);
+      text-align: center;
+      padding: 18px 24px 14px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid var(--accent);
+    }
+    .site-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .site-name span { color: var(--accent2); }
+    .site-name:hover { color: var(--accent2); }
+    .tagline {
+      font-size: 0.78rem;
+      color: #b0a898;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    nav button {
+      background: none;
+      border: none;
+      color: #c9c0b4;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    nav button:hover, nav button.active {
+      color: var(--accent2);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ── PAGES ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── HOME ── */
+    .hero {
+      max-width: 900px;
+      margin: 60px auto 0;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .hero-label {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      line-height: 1.15;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero p {
+      font-family: 'Lora', serif;
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .divider span {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: italic;
+      white-space: nowrap;
+    }
+
+    /* ── ARTICLES GRID ── */
+    .articles-section {
+      max-width: 1100px;
+      margin: 44px auto 80px;
+      padding: 0 24px;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 28px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    }
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: var(--tag-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+    }
+    .card-body {
+      padding: 22px 24px 28px;
+    }
+    .card-tag {
+      font-size: 0.68rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+    .card-excerpt {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+    .card-meta {
+      font-size: 0.75rem;
+      color: #b0a898;
+    }
+    .read-btn {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent2);
+      padding-bottom: 1px;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .read-btn:hover { color: var(--text); }
+
+    /* ── ARTICLE PAGE ── */
+    .article-container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 50px 24px 90px;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 40px;
+      transition: color 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .back-btn:hover { color: var(--accent); }
+    .article-tag {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+    .article-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 18px;
+      color: var(--text);
+    }
+    .article-subtitle {
+      font-family: 'Lora', serif;
+      font-size: 1.1rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+    .article-meta {
+      display: flex;
+      gap: 20px;
+      font-size: 0.78rem;
+      color: #b0a898;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      margin-bottom: 40px;
+    }
+    .article-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 40px 0 16px;
+      color: var(--text);
+    }
+    .article-content p {
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      line-height: 1.85;
+      color: #3a3630;
+      margin-bottom: 22px;
+    }
+    .article-content ul {
+      padding-left: 20px;
+      margin-bottom: 22px;
+    }
+    .article-content ul li {
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: #3a3630;
+      margin-bottom: 8px;
+    }
+
+    /* ── AFFILIATE BLOCK ── */
+    .affiliate-card {
+      background: linear-gradient(135deg, #FFF8F3 0%, #FFF3E8 100%);
+      border: 1.5px solid var(--accent2);
+      border-radius: 6px;
+      padding: 24px 28px;
+      margin: 32px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .affiliate-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .affiliate-info {}
+    .affiliate-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .affiliate-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .affiliate-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 10px 22px;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .affiliate-btn:hover { background: #a84e24; }
+    .affiliate-placeholder {
+      font-size: 0.72rem;
+      color: var(--accent2);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* ── CALLOUT ── */
+    .callout {
+      background: var(--tag-bg);
+      border-left: 4px solid var(--accent);
+      padding: 18px 22px;
+      margin: 28px 0;
+      border-radius: 0 4px 4px 0;
+    }
+    .callout p {
+      font-size: 0.95rem !important;
+      color: var(--text) !important;
+      margin: 0 !important;
+    }
+
+    /* ── SUMMARY BOX ── */
+    .summary-box {
+      background: var(--text);
+      color: var(--bg);
+      border-radius: 6px;
+      padding: 28px 32px;
+      margin: 36px 0;
+    }
+    .summary-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--accent2);
+      margin-bottom: 14px;
+      letter-spacing: 0.5px;
+    }
+    .summary-box ul { padding-left: 18px; }
+    .summary-box ul li {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #d9d0c5;
+      margin-bottom: 6px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text);
+      color: #7a7167;
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 0.8rem;
+      line-height: 1.8;
+    }
+    footer strong { color: var(--accent2); font-family: 'Playfair Display', serif; font-size: 1rem; }
+
+    @media(max-width: 600px) {
+      .affiliate-card { flex-direction: column; gap: 12px; }
+      .article-meta { flex-direction: column; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <div class="site-name" onclick="showPage('home')">Lar <span>Esperto</span></div>
+  <div class="tagline">os melhores achados para sua casa</div>
+  <nav>
+    <button onclick="showPage('home')" id="nav-home" class="active">Início</button>
+    <button onclick="showArticle(0)" id="nav-a0">Organização</button>
+    <button onclick="showArticle(1)" id="nav-a1">Cozinha</button>
+    <button onclick="showArticle(2)" id="nav-a2">Limpeza</button>
+  </nav>
+</header>
+
+<!-- ══ HOME PAGE ══ -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <span class="hero-label">✦ Guia de Compras</span>
+    <h1>Produtos que fazem sua <em>casa funcionar</em> melhor</h1>
+    <p>Reviews honestos, comparativos e os melhores achados do Mercado Livre para transformar sua rotina em casa.</p>
+  </div>
+
+  <div class="divider" style="margin-top:50px"><span>artigos em destaque</span></div>
+
+  <div class="articles-section">
+    <p class="section-label">✦ publicações recentes</p>
+    <div class="articles-grid">
+
+      <div class="card" onclick="showArticle(0)">
+        <div class="card-img">🗂️</div>
+        <div class="card-body">
+          <p class="card-tag">Organização</p>
+          <h2 class="card-title">5 Organizadores que Transformam Qualquer Cômodo</h2>
+          <p class="card-excerpt">De gavetas bagunçadas a armários dignos de foto. Testamos os melhores produtos de organização do Mercado Livre.</p>
+          <div class="card-footer">
+            <span class="card-meta">8 min de leitura</span>
+            <button class="read-btn">Ler artigo →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" onclick="showArticle(1)">
+        <div class="card-img">🍳</div>
+        <div class="card-body">
+          <p class="card-tag">Cozinha</p>
+          <h2 class="card-title">Os Utensílios de Cozinha que Todo Mundo Deveria Ter</h2>
+          <p class="card-excerpt">Descobrimos os gadgets de cozinha que realmente fazem diferença no dia a dia — sem gastar uma fortuna.</p>
+          <div class="card-footer">
+            <span class="card-meta">7 min de leitura</span>
+            <button class="read-btn">Ler artigo →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" onclick="showArticle(2)">
+        <div class="card-img">🧹</div>
+        <div class="card-body">
+          <p class="card-tag">Limpeza</p>
+          <h2 class="card-title">Melhores Produtos de Limpeza: O que Vale a Pena Comprar?</h2>
+          <p class="card-excerpt">Vassouras, rodos, aspiradores e kits de limpeza. Separamos o que realmente funciona do que é só promessa.</p>
+          <div class="card-footer">
+            <span class="card-meta">9 min de leitura</span>
+            <button class="read-btn">Ler artigo →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ ARTICLE 0 – ORGANIZAÇÃO ══ -->
+<div id="page-article-0" class="page">
+<div class="article-container">
+  <button class="back-btn" onclick="showPage('home')">← Voltar ao início</button>
+  <p class="article-tag">Organização · Review</p>
+  <h1 class="article-title">5 Organizadores que Transformam Qualquer Cômodo</h1>
+  <p class="article-subtitle">De gavetas bagunçadas a armários dignos de foto — testamos os melhores organizadores do Mercado Livre para te ajudar a escolher.</p>
+  <div class="article-meta">
+    <span>📅 Atualizado em fevereiro de 2025</span>
+    <span>⏱ 8 min de leitura</span>
+    <span>🏷️ Organização, Casa</span>
+  </div>
+
+  <div class="article-content">
+    <p>Se tem uma coisa que muda a qualidade de vida em casa, é a organização. Mas não precisa gastar rios de dinheiro nem reformar nada — às vezes, os produtos certos já fazem toda a diferença. Selecionamos 5 organizadores que encontramos no Mercado Livre com ótimas avaliações, bom custo-benefício e que já provaram funcionar na prática.</p>
+
+    <div class="summary-box">
+      <h3>🗺 O que você vai encontrar neste artigo</h3>
+      <ul>
+        <li>Organizador de gaveta modular — ideal para cozinha e escritório</li>
+        <li>Caixas empilháveis com tampa — perfeito para closet e armário</li>
+        <li>Suporte de parede para roupas — economiza espaço do quarto</li>
+        <li>Organizador de sapatos transparente — fim do caos no armário</li>
+        <li>Cesto de roupa dobrável com divisórias — prático e elegante</li>
+      </ul>
+    </div>
+
+    <h2>1. Organizador de Gaveta Modular</h2>
+    <p>Esse é um clássico que funciona de verdade. O sistema modular permite montar no tamanho exato da sua gaveta, seja na cozinha para talher, no escritório para canetas, ou no banheiro para produtos de beleza. O material costuma ser resistente e fácil de limpar.</p>
+    <p>As avaliações no Mercado Livre são consistentemente altas — a maioria dos compradores elogia a praticidade e a qualidade do plástico, que não dobra com o uso.</p>
+
+    <div class="affiliate-card">
+      <div class="affiliate-icon">🗂️</div>
+      <div class="affiliate-info">
+        <p class="affiliate-name">Organizador de Gaveta Modular</p>
+        <p class="affiliate-desc">Kit organizador para qualquer tamanho e tipo de gaveta.</p>
+        <a class="affiliate-btn" href="https://mercadolivre.com/sec/2ie86ZZ" target="_blank">Ver no Mercado Livre →</a>
+      </div>
+    </div>
+
+    <h2>2. Caixas Empilháveis com Tampa</h2>
+    <p>Para quem tem pouco espaço no armário, as caixas empilháveis são uma revolução. Você pode guardar roupas de cama, toalhas, roupas fora de estação ou até brinquedos — tudo organizado, protegido do pó e fácil de achar.</p>
+    <p>O diferencial das caixas com tampa é que elas mantêm os itens mais limpos por mais tempo. Prefira as versões com tampa transparente ou etiqueta inclusa para identificar o conteúdo sem precisar abrir.</p>
+
+    <div class="callout">
+      <p>💡 <strong>Dica:</strong> Compre em kit — sai mais barato e garante uniformidade visual. Um armário com caixas do mesmo modelo fica muito mais organizado e agradável visualmente.</p>
+    </div>
+
+    <div class="affiliate-card">
+      <div class="affiliate-icon">📦</div>
+      <div class="affiliate-info">
+        <p class="affiliate-name">Kit Caixas Empilháveis com Tampa</p>
+        <p class="affiliate-desc">Kit com 4 ou 6 caixas, disponível em diferentes tamanhos. Ideal para armário e quarto.</p>
+        <a class="affiliate-btn" href="https://mercadolivre.com/sec/1Bk6w7D" target="_blank">Ver no Mercado Livre →</a>
+      </div>
+    </div>
+
+    <h2>3. Suporte de Parede para Roupas</h2>
+    <p>Para quartos pequenos, um suporte de parede pode ser a diferença entre ter ou não ter espaço para respirar. Os modelos dobráveis são especialmente práticos: quando não está em uso, fica completamente rente à parede.</p>
+    <p>Instalação simples com parafusos, suporta entre 15kg e 30kg dependendo do modelo, e dá um visual mais clean e organizado para o quarto.</p>
+
+    <div class="affiliate-card">
+      <div class="affiliate-icon">👕</div>
+      <div class="affiliate-info">
+        <p class="affiliate-name">Suporte de Parede Dobrável para Roupas</p>
+        <p class="affiliate-desc">Aramado resistente, dobrável, suporta até 25kg. Inclui parafusos e buchas para instalação.</p>
+        <a class="affiliate-btn" href="https://mercadolivre.com/sec/1gonVxy" target="_blank">Ver no Mercado Livre →</a>
+      </div>
+    </div>
+
+    <h2>4. Organizador de Sapatos Transparente</h2>
+    <p>Se você empilha sapatos na caixinha original ou deixa todos jogados no chão do armário, os organizadores transparentes vão mudar sua vida. Você vê o par que quer sem precisar abrir nada, e os sapatos ficam protegidos de poeira e deformação.</p>
+    <p>Os modelos empilháveis são os mais elogiados — ocupam menos espaço e ficam com visual mais uniforme. Alguns modelos vêm com trava frontal para maior segurança e durabilidade.</p>
+
+    <div class="affiliate-card">
+      <div class="affiliate-icon">👟</div>
+      <div class="affiliate-info">
+        <p class="affiliate-name">Caixa Organizadora de Sapatos Transparente</p>
+        <p class="affiliate-desc">Kit com 6 caixas empilháveis, tampa transparente com trava. Ideal para qualquer tipo de calçado.</p>
+        <a class="affiliate-btn" href="https://mercadolivre.com/sec/2JUtdPH" target="_blank">Ver no Mercado Livre →</a>
+      </div>
+    </div>
+
+    <h2>5. Cesto de Roupa Dobrável com Divisórias</h2>
+    <p>O cesto de roupa suja é um item que todo mundo tem, mas poucos escolhem bem. Os modelos dobráveis com divisórias permitem separar roupas claras e escuras (ou de pessoas diferentes) no mesmo cesto, economizando espaço e tempo na hora de lavar.</p>
+    <p>Quando não precisar, basta dobrar e guardar. Ideal para quartos menores ou para quem gosta de organização sem muito volume.</p>
+
+    <div class="affiliate-card">
+      <div class="affiliate-icon">🧺</div>
+      <div class="affiliate-info">
+        <p class="affiliate-name">Cesto de Roupa Dobrável com 2 Divisórias</p>
+        <p class="affiliate-desc">60L de capacidade, alças reforçadas, tecido lavável. Dobra completamente para armazenamento.</p>
+        <a class="affiliate-btn" href="https://mercadolivre.com/sec/2cCVFne" target="_blank">Ver no Mercado Livre →</a>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p>💬 <strong>Conclusão:</strong> Organizar a casa não precisa ser caro nem difícil. Com os produtos certos, qualquer cômodo pode ganhar mais funcionalidade e um visual mais agradável. Os 5 itens desta lista têm ótimo custo-benefício e avaliações positivas de milhares de compradores.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ ARTICLE 1 – COZINHA ══ -->
+<div id="page-article-1" class="page">
+<div class="article-container">
+  <button class="back-btn" onclick="showPage('home')">← Voltar ao início</button>
+  <p class="article-tag">Cozinha · Guia de Compras</p>
+  <h1 class="article-title">Os Utensílios de Cozinha que Todo Mundo Deveria Ter</h1>
+  <p class="article-subtitle">Descobrimos os gadgets e utensílios de cozinha que realmente fazem diferença no dia a dia — testados, avaliados e com ótimo preço no Mercado Livre.</p>
+  <div class="article-meta">
+    <span>📅 Atualizado em fevereiro de 2025</span>
+    <span>⏱ 7 min de leitura</span>
+    <span>🏷️ Cozinha, Utilidades</span>
+  </div>
+
+  <div class="article-content">
+    <p>A cozinha é o coração da casa — e os utensílios certos fazem toda a diferença entre cozinhar com prazer ou com estresse. Não precisamos de gadgets complicados ou caros. Neste guia, separamos os itens mais práticos, duráveis e bem avaliados que você encontra no Mercado Livre hoje.</p>
+
+    <div class="summary-box">
+      <h3>🍴 O que você vai encontrar neste artigo</h3>
+      <ul>
+        <li>Jogo de facas com cepo — base essencial para qualquer cozinha</li>
+        <li>Tábua de corte de bambu — sustentável e durável</li>
+        <li>Panela de pressão elétrica — praticidade no dia a dia</li>
+        <li>Escorredor de louça dobrável — economiza espaço na pia</li>
+        <li>Conjunto de potes herméticos — mantém alimentos frescos por mais tempo</li>
+      </ul>
+    </div>
+
+    <h2>1. Jogo de Facas com Cepo</h2>
+    <p>Uma boa faca transforma a experiência de cozinhar. Cortar com faca cega é trabalhoso e, paradoxalmente, mais perigoso — é preciso forçar mais, o que aumenta o risco de escorregar. Um bom jogo de facas com aço inox e cepo organizador já resolve o problema de armazenamento e segurança.</p>
+    <p>Os conjuntos mais elogiados no Mercado Livre costumam incluir 5 ou 6 peças (facas de chef, pão, desossar, serrilhada e legumes) além do amolador e do cepo de madeira.</p>
+
+    <div class="affiliate-card">
+      <div class="affiliate-icon">🔪</div>
+      <div class="affiliate-info">
+        <p class="affiliate-name">Jogo de Facas Inox com Cepo de Madeira</p>
+        <p class="affiliate-desc">Kit com 5 facas + amolador + cepo. Aço inox resistente, cabo ergonômico antiderrapante.</p>
+        <a class="affiliate-btn" href="https://mercadolivre.com/sec/2qfPGz2" target="_blank">Ver no Mercado Livre →</a>
+      </div>
+    </div>
+
+    <h2>2. Tábua de Corte de Bambu</h2>
+    <p>A tábua de bambu caiu no gosto dos cozinheiros por boas razões: é mais resistente que as de plástico, não risca tão fácil, é sustentável e tem um visual muito mais bonito na cozinha. Ao contrário da madeira comum, o bambu é naturalmente antibacteriano e não absorve odores com facilidade.</p>
+
+    <div class="callout">
+      <p>💡 <strong>Dica de uso:</strong> Passe azeite ou óleo mineral de cozinha na tábua de bambu a cada 3 meses para manter a hidratação da madeira e prolongar a vida útil do produto.</p>
+    </div>
+
+    <div class="affiliate-card">
+      <div class="affiliate-icon">🪵</div>
+      <div class="affiliate-info">
+        <p class="affiliate-name">Tábua de Corte de Bambu com Alça</p>
+        <p class="affiliate-desc">40x30cm, bambu natural, inclui canaleta para líquidos e alça para fácil manuseio.</p>
+        <a class="affiliate-btn" href="https://mercadolivre.com/sec/16cNS7R" target="_blank">Ver no Mercado Livre →</a>
+      </div>
+    </div>
+
+    <h2>3. Panela de Pressão Elétrica</h2>
+    <p>Se você ainda usa panela de pressão no fogão, prepare-se para se surpreender. As panelas elétricas são mais seguras, mais fáceis de usar e permitem programar o tempo de cozimento — você liga e vai fazer outra coisa. Feijão, arroz integral, frango, legumes: tudo fica pronto mais rápido e com mais sabor.</p>
+    <p>Os modelos de 3L e 5L são os mais buscados para uso doméstico. Prefira os com travamento automático de pressão e revestimento antiaderente no interior.</p>
+
+    <div class="affiliate-card">
+      <div class="affiliate-icon">🍲</div>
+      <div class="affiliate-info">
+        <p class="affiliate-name">Panela de Pressão Elétrica 5L</p>
+        <p class="affiliate-desc">Timer digital, revestimento interno antiaderente, desligamento automático.</p>
+        <a class="affiliate-btn" href="https://mercadolivre.com/sec/2KQjWpt" target="_blank">Ver no Mercado Livre →</a>
+      </div>
+    </div>
+
+    <h2>4. Escorredor de Louça Dobrável</h2>
+    <p>Para cozinhas pequenas, o escorredor dobrável é um salva-vidas. Quando não está em uso, dobra completamente e vai para uma gaveta, liberando a pia. Mas é importante escolher modelos com boa resistência.</p>
+
+    <div class="affiliate-card">
+      <div class="affiliate-icon">🍽️</div>
+      <div class="affiliate-info">
+        <p class="affiliate-name">Escorredor de Louça Dobrável em Inox</p>
+        <p class="affiliate-desc">Aço inox, suporta até 10kg, dobrável para armazenamento compacto.</p>
+        <a class="affiliate-btn" href="https://mercadolivre.com/sec/2Qzha7o" target="_blank">Ver no Mercado Livre →</a>
+      </div>
+    </div>
+
+    <h2>5. Conjunto de Potes Herméticos</h2>
+    <p>Guardar comida na geladeira ou na despensa sem pote hermético é perder dinheiro. Alimentos abertos estragam mais rápido, absorvem cheiros e perdem qualidade. Um bom conjunto de potes com tampa que veda de verdade resolve tudo isso — e ainda deixa a geladeira com cara de organizada.</p>
+
+    <div class="affiliate-card">
+      <div class="affiliate-icon">🥡</div>
+      <div class="affiliate-info">
+        <p class="affiliate-name">Kit 10 Potes Herméticos de Vidro</p>
+        <p class="affiliate-desc">10 potes de tamanhos variados, vidro temperado, tampa de plástico com vedação hermética. Vai ao forno e micro-ondas.</p>
+        <a class="affiliate-btn" href="https://mercadolivre.com/sec/1f4arv9" target="_blank">Ver no Mercado Livre →</a>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p>💬 <strong>Conclusão:</strong> Uma cozinha bem equipada não precisa ser cara. Com esses 5 itens, você já tem uma base sólida para cozinhar com mais praticidade, segurança e eficiência todos os dias.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ ARTICLE 2 – LIMPEZA ══ -->
+<div id="page-article-2" class="page">
+<div class="article-container">
+  <button class="back-btn" onclick="showPage('home')">← Voltar ao início</button>
+  <p class="article-tag">Limpeza · Comparativo</p>
+  <h1 class="article-title">Melhores Produtos de Limpeza: O que Vale a Pena Comprar?</h1>
+  <p class="article-subtitle">Vassouras, rodos, mops e kits de limpeza — separamos o que realmente funciona do que é só promessa bonita na foto.</p>
+  <div class="article-meta">
+    <span>📅 Atualizado em fevereiro de 2025</span>
+    <span>⏱ 9 min de leitura</span>
+    <span>🏷️ Limpeza, Organização</span>
+  </div>
+
+  <div class="article-content">
+    <p>Limpar a casa é inevitável — mas os produtos certos tornam tudo muito mais rápido e eficiente. Com tanta opção no Mercado Livre, fica difícil saber no que vale a pena investir. Neste artigo, fizemos um comparativo dos itens de limpeza mais bem avaliados, focando em custo-benefício e durabilidade.</p>
+
+    <div class="summary-box">
+      <h3>🧹 O que você vai encontrar neste artigo</h3>
+      <ul>
+        <li>Mop giratório com balde — o queridinhos dos reviews</li>
+        <li>Vassoura com cerdas macias — ideal para pisos frios</li>
+        <li>Rodo de silicone — para banheiro e áreas molhadas</li>
+        <li>Aspirador de pó vertical sem fio — praticidade total</li>
+        <li>Pano de microfibra kit — o custo-benefício imbatível</li>
+      </ul>
+    </div>
+
+    <h2>1. Mop Giratório com Balde</h2>
+    <p>O mop giratório com balde torcedor é, de longe, um dos produtos de limpeza mais bem avaliados no Mercado Livre. E faz sentido: ele resolve o problema do pano ensopado de uma vez. Você controla a umidade pela torsão, o que garante que o piso seque mais rápido e a limpeza seja mais eficiente.</p>
+    <p>Os modelos mais elogiados têm balde de 15L ou mais, cabeça rotativa de 360 graus e cabo telescópico ajustável. Prefira os que vêm com cabeça reserva inclusa.</p>
+
+    <div class="affiliate-card">
+      <div class="affiliate-icon">🪣</div>
+      <div class="affiliate-info">
+        <p class="affiliate-name">Mop Giratório com Balde Torcedor 16L</p>
+        <p class="affiliate-desc">Cabo telescópico ajustável em aço inox, cabeça rotativa 360°, balde com escorregador para torsão, inclui 2 refis.</p>
+        <a class="affiliate-btn" href="https://mercadolivre.com/sec/1cXyipS" target="_blank">Ver no Mercado Livre →</a>
+      </div>
+    </div>
+
+    <h2>2. Vassoura com Cerdas Macias para Piso Frio</h2>
+    <p>Parece simples, mas escolher uma vassoura ruim é frustrante — as cerdas que arrepiam e não juntam o pó direito são mais comuns do que deveriam. As melhores vassouras para piso frio têm cerdas macias e densas, cabo de metal resistente e têm uma boa curvatura para alcançar os cantos.</p>
+
+    <div class="callout">
+      <p>💡 <strong>Atenção:</strong> Para piso de madeira ou laminado, sempre prefira vassouras com cerdas antiestáticas — elas retêm mais poeira e não arranham a superfície.</p>
+    </div>
+
+    <div class="affiliate-card">
+      <div class="affiliate-icon">🧹</div>
+      <div class="affiliate-info">
+        <p class="affiliate-name">Kit de vassouras com Cerdas Macias</p>
+        <p class="affiliate-desc">2 vassouras com cerdas macias e densas, multiuso.</p>
+        <a class="affiliate-btn" href="https://mercadolivre.com/sec/2gCCeKe" target="_blank">Ver no Mercado Livre →</a>
+      </div>
+    </div>
+
+    <h2>3. Rodo de Silicone para Banheiro</h2>
+    <p>O rodo de silicone é um dos produtos que quem compra jamais volta para o tradicional. A lâmina de silicone raspa a água com mais eficiência, não desgasta o piso e tem durabilidade muito maior que o borracha comum. Para box de vidro, então, é indispensável — elimina os respingos e evita aquela umidade acumulada que vira mancha.</p>
+
+    <div class="affiliate-card">
+      <div class="affiliate-icon">🚿</div>
+      <div class="affiliate-info">
+        <p class="affiliate-name">Kit 2 Rodos Mágicos de Silicone para Banheiro e Box</p>
+        <p class="affiliate-desc">Lâmina de silicone de alta resistência, cabo de alumínio que chega a 1,40cm, 50cm de largura. Ideal para box de vidro.</p>
+        <a class="affiliate-btn" href="https://mercadolivre.com/sec/2cRfbvb" target="_blank">Ver no Mercado Livre →</a>
+      </div>
+    </div>
+
+    <h2>4. Aspirador de Pó Vertical Sem Fio</h2>
+    <p>Para quem tem tapetes, pets ou simplesmente quer praticidade, um aspirador sem fio é uma das melhores compras que se pode fazer para casa. Você pega, aspira e guarda em segundos — sem precisar montar nada ou se preocupar com o cabo. Os modelos mais modernos têm bateria de lítio com autonomia entre 20 e 40 minutos, o suficiente para uma limpeza completa.</p>
+    <p>Os modelos mais elogiados no Mercado Livre são os que oferecem bom sucção (acima de 15.000 Pa) e possuem filtro HEPA para quem tem alergia.</p>
+
+    <div class="affiliate-card">
+      <div class="affiliate-icon">🌀</div>
+      <div class="affiliate-info">
+        <p class="affiliate-name">Aspirador de Pó Vertical Sem Fio</p>
+        <p class="affiliate-desc">Bateria de lítio 40min de autonomia, filtro HEPA lavável, sucção ajustável, 2 em 1 (vertical + portátil).</p>
+        <a class="affiliate-btn" href="https://mercadolivre.com/sec/1dsQv9L" target="_blank">Ver no Mercado Livre →</a>
+      </div>
+    </div>
+
+    <h2>5. Kit de Panos de Microfibra</h2>
+    <p>O pano de microfibra é um dos maiores custo-benefícios em produtos de limpeza. Ele limpa e seca superfícies com muito mais eficiência que o pano de prato comum, não deixa fiapos e pode ser lavado centenas de vezes sem perder a qualidade. São ótimos para limpeza geral, vidros, espelhos, eletrodomésticos e móveis.</p>
+
+    <div class="affiliate-card">
+      <div class="affiliate-icon">🧻</div>
+      <div class="affiliate-info">
+        <p class="affiliate-name">Kit 10 Panos de Microfibra Multiuso</p>
+        <p class="affiliate-desc">10 unidades em cores variadas, não risca superfícies, lavável na máquina.</p>
+        <a class="affiliate-btn" href="https://mercadolivre.com/sec/1cpYYe5" target="_blank">Ver no Mercado Livre →</a>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p>💬 <strong>Conclusão:</strong> Investir nos produtos de limpeza certos significa menos tempo, menos esforço e um resultado melhor. Os 5 itens desta lista têm ótimas avaliações e são uma base sólida para manter qualquer tipo de casa bem cuidada.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <strong>Lar Esperto</strong><br><br>
+  Este site contém links de afiliados. Quando você compra através dos nossos links, podemos receber uma comissão sem custo adicional para você.<br>
+  Isso nos ajuda a continuar criando conteúdo gratuito e de qualidade. 💛<br><br>
+  © 2025 Lar Esperto · Todos os direitos reservados
+</footer>
+
+<script>
+  const pages = ['home', 'article-0', 'article-1', 'article-2'];
+  const navIds = ['nav-home', 'nav-a0', 'nav-a1', 'nav-a2'];
+
+  function showPage(pageId) {
+    pages.forEach(p => {
+      const el = document.getElementById('page-' + p);
+      if (el) el.classList.remove('active');
+    });
+    const target = document.getElementById('page-' + pageId);
+    if (target) {
+      target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    navIds.forEach(n => {
+      const el = document.getElementById(n);
+      if (el) el.classList.remove('active');
+    });
+  }
+
+  function showArticle(index) {
+    showPage('article-' + index);
+    const navMap = { 0: 'nav-a0', 1: 'nav-a1', 2: 'nav-a2' };
+    const navEl = document.getElementById(navMap[index]);
+    if (navEl) navEl.classList.add('active');
+  }
+
+  document.getElementById('nav-home').addEventListener('click', () => {
+    showPage('home');
+    document.getElementById('nav-home').classList.add('active');
+  });
+</script>
+
+</body>
+</html>
